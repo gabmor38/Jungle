@@ -2,8 +2,6 @@ Rails.application.routes.draw do
 
   root to: 'products#index'
 
-  
-
   resources :products, only: [:index, :show]
   resources :categories, only: [:show]
 
@@ -28,6 +26,10 @@ Rails.application.routes.draw do
 
   # Example of regular route:
     get 'about/' => 'about#index'
+
+    get '/login' => 'sessions#new'
+    post '/login' => 'sessions#create'
+    get '/logout' => 'sessions#destroy'
     get '/signup' => 'users#new'
     post '/users' => 'user#create'
 
