@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   # Example of regular route:
   
+  
     get '/signup' => 'users#new'
     post '/users' => 'users#create'
 
