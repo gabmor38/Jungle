@@ -1,36 +1,36 @@
 <h1>Signup!</h1>
 
 <%= form_for :user, url: '/users' do |f| %>
-<div class="row">
+
+  <div class="row">
+
   <div class="form-group col-xs-8">
     <%= label_tag :first_name, 'First Name' %>
     <%= f.text_field :first_name, class: 'form-control', placeholder: 'First Name' %>
-    </div>
-
-    <div class="form-group col-xs-8 ">
-    <%= label_tag :last_name, 'Last Name' %>
-    <%= f.text_field :last_name, class: 'form-control', placeholder: 'Last Name' %>
-    </div>
-
-    <div class="form-group col-xs-8">
-    <%= label_tag :email, 'Email' %>
-    <%= f.text_field :email, class: 'form-control', placeholder: 'Email' %>
-    </div>
-
-    <div class="form-group col-xs-8">
-    <strong>Password: </strong><%= f.password_field :password, class: 'form-control',placeholder: 'Password' %>
-    </div>
-
-    <div class="col-xs-8">
-    <strong>Password Confirmation: </strong><%= f.password_field :password_confirmation, class: 'form-control',placeholder: 'Password Cofirmation' %>
-    </div>
-
   </div>
 
-<div class="row">
+  <div class="form-group col-xs-8 ">
+    <%= label_tag :last_name, 'Last Name' %>
+    <%= f.text_field :last_name, class: 'form-control', placeholder: 'Last Name' %>
+  </div>
+
+  <div class="form-group col-xs-8">
+    <%= label_tag :email, 'Email' %>
+    <%= f.text_field :email, class: 'form-control', placeholder: 'Email' %>
+  </div>
+
+  <div class="form-group col-xs-8">
+    <strong>Password: </strong><%= f.password_field :password, class: 'form-control',placeholder: 'Password' %>
+  </div>
+
+  <div class="form-group col-xs-8">
+    <strong>Password Confirmation: </strong><%= f.password_field :password_confirmation, class: 'form-control',placeholder: 'Password Cofirmation' %>
+  </div>
+
   <div class="col-xs-8">
     <%=  f.submit "Submit", class: "btn btn-info" %>
   </div>
+
 </div>
 
 <% end %>
