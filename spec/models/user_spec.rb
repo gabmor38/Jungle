@@ -3,14 +3,15 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe 'validations' do
     before do
-      @user = User.new({
+      @user = User.new(
         first_name: 'Gabriela',
         last_name: 'Moreno',
         email: 'hellofriends@hello',
         password: "123456",
         password_confirmation: "123456"
-      })
+      )
     end
+
       it 'creates a new user' do
         expect(@user).to be_valid
       end
@@ -54,18 +55,32 @@ RSpec.describe User, type: :model do
         @user.password = '123456'
         expect(@user).to be_valid
       end
-end
+  
+  end
+
   describe '.authenticate_with_credentials' do
     before do
-      @user = User.new(first_name: 'Gabriela', last_name: 'Moreno', email: 'HelloMyName@hello', password:'123456', password_confirmation:'123456')
-        it 'should ' do
-        @user.save
-        valid_user = User.authenticate_with_credentials('HelloMyName@hello', '123456')
-        expect(valid_user).to eq(@user)
-        end
-        it 'should authenticate if user adds a space to email' do
-        
+      @user = User.new(first_name: "Mr", last_name: "Bean", email: "jan@mailme.com", password: "123456", password_confirmation: "123456")
     end
-  end
+    
+    it 'should return a truthy value if user login is correct' do
+      @user.save!
+    
+      @new_session = @user.authenticate_with_credentials("jan@mailme.com", "123456")
+      expect(@new_session).to be_truthy
+    end
+
+    it 'should authenticate if user adds a space before the email' do
+      @user.save!
+      @valid_user = @user.authenticate_with_credentials(' jan@mailme.com', '123456')
+      expect(@valid_user).to be_truthy
+    end
+
+    
+  end   
 end
+
+
+
+
 
