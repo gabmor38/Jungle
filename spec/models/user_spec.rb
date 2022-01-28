@@ -6,63 +6,66 @@ RSpec.describe User, type: :model do
       @user = User.new({
         first_name: 'Gabriela',
         last_name: 'Moreno',
-        email: 'hello@hello',
-        password: "123",
-        password_confirmation: "123"
+        email: 'hellofriends@hello',
+        password: "123456",
+        password_confirmation: "123456"
       })
     end
       it 'creates a new user' do
-        expect(@user.save).to be true
+        expect(@user).to be_valid
       end
 
       it 'should have a first_name' do
         @user.first_name = nil
-        @user.save
         expect(@user).to_not be_valid  
         expect(@user.errors.full_messages).to include("First name can't be blank")
       end
 
       it 'should have a last_name' do
         @user.last_name = nil
-        @user.save
         expect(@user).to_not be_valid
         expect(@user.errors.full_messages).to include("Last name can't be blank")
       end
 
       it 'should have an email' do
         @user.email = nil
-        @user.save
         expect(@user).to_not be_valid
         expect(@user.errors.full_messages).to include ("Email can't be blank")
       end
 
       it 'should have a password' do
         @user.password = nil
-        @user.save
         expect(@user).to_not be_valid
         expect(@user.errors.full_messages).to include("Password can't be blank")
       end
 
-      it 'password_confirmation should be present' do
+      it 'password confirmation should not be blank' do
         @user.password_confirmation = nil
-        @user.save
         expect(@user).to_not be_valid
-        expect(@user.errors.full_messages).to include("Password confirmation can't be blank")
       end
 
       it "password should match password confirmation" do
-        @user.password = '123'
-        @user.password_confirmation ='123'
-        @user.save
+        @user.password = '123456'
+        @user.password_confirmation ='123456'
         expect(@user.password).to match(@user.password_confirmation)
       end
       
-      it 'password should have a minimum length of 8 characters' do
-        @user.password = '123'
-        @user.password_confirmation = '123'
-        expect(@user.password).to_not be_valid
-        expect(@user.errors.full_messages).to include("Password is too short (minimum is 8 characters)")
+      it 'password should have a minimum length of 6 characters' do
+        @user.password = '123456'
+        expect(@user).to be_valid
       end
-    
+end
+  describe '.authenticate_with_credentials' do
+    before do
+      @user = User.new(first_name: 'Gabriela', last_name: 'Moreno', email: 'HelloMyName@hello', password:'123456', password_confirmation:'123456')
+        it 'should ' do
+        @user.save
+        valid_user = User.authenticate_with_credentials('HelloMyName@hello', '123456')
+        expect(valid_user).to eq(@user)
+        end
+        it 'should authenticate if user adds a space to email' do
+        
+    end
   end
 end
+
