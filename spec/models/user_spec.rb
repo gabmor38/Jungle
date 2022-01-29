@@ -66,14 +66,14 @@ RSpec.describe User, type: :model do
     it 'should return a truthy value if user login is correct' do
       @user.save!
     
-      @valid_user = @user.authenticate_with_credentials("jan@mailme.com", "123456")
-      expect(@valid_user).to be_truthy
+      valid_user = User.authenticate_with_credentials("jan@mailme.com", "123456")
+      expect(valid_user).to be_truthy
     end
 
     it 'should authenticate if user adds a space before the email' do
       @user.save!
-      @valid_user = @user.authenticate_with_credentials(' jan@mailme.com', '123456')
-      expect(@valid_user).to be_truthy
+      valid_user = User.authenticate_with_credentials(' jan@mailme.com', '123456')
+      expect(valid_user).to be_truthy
     end
 
     
